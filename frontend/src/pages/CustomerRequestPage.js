@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { serviceRequestAPI } from '../services/api';
 
 function CustomerRequestPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     customer_name: '',
     customer_email: '',
@@ -105,6 +107,26 @@ function CustomerRequestPage() {
   return (
     <div>
       <div className="navbar">
+        <button 
+          onClick={() => navigate('/')} 
+          className="back-home-button"
+          style={{
+            position: 'absolute',
+            left: '20px',
+            background: 'rgba(255, 255, 255, 0.2)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            color: 'white',
+            padding: '8px 16px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '14px',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseOver={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.3)'}
+          onMouseOut={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.2)'}
+        >
+          ← Back to Home
+        </button>
         <h1>🚚 Service Request App</h1>
       </div>
 

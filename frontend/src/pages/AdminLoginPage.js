@@ -39,6 +39,37 @@ function AdminLoginPage() {
 
   return (
     <div className="login-container">
+      <button 
+        onClick={() => navigate('/')} 
+        className="back-home-button"
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '20px',
+          background: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ddd',
+          color: '#333',
+          padding: '10px 20px',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          fontSize: '14px',
+          fontWeight: '500',
+          transition: 'all 0.3s ease',
+          zIndex: 1000
+        }}
+        onMouseOver={(e) => {
+          e.target.style.background = 'white';
+          e.target.style.transform = 'translateY(-2px)';
+          e.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        }}
+        onMouseOut={(e) => {
+          e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+          e.target.style.transform = 'translateY(0)';
+          e.target.style.boxShadow = 'none';
+        }}
+      >
+        ← Back to Home
+      </button>
       <div className="login-box">
         <h2>🔐 Admin Login</h2>
 

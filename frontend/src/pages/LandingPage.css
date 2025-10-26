@@ -1,0 +1,283 @@
+/* Landing Page Styles */
+.landing-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
+}
+
+.landing-content {
+  max-width: 1200px;
+  width: 100%;
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.landing-header {
+  text-align: center;
+  margin-bottom: 50px;
+  color: white;
+}
+
+.landing-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.landing-tagline {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.landing-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.option-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.option-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  transition: height 0.3s ease;
+}
+
+.customer-card::before {
+  background: linear-gradient(90deg, #4CAF50, #45a049);
+}
+
+.admin-card::before {
+  background: linear-gradient(90deg, #2196F3, #1976D2);
+}
+
+.option-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.option-card:hover::before {
+  height: 100%;
+  opacity: 0.05;
+}
+
+.option-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.option-card h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.option-card > p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.option-features {
+  list-style: none;
+  padding: 0;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.option-features li {
+  padding: 10px 0;
+  color: #555;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #eee;
+  transition: all 0.2s ease;
+}
+
+.option-features li:last-child {
+  border-bottom: none;
+}
+
+.option-card:hover .option-features li {
+  color: #333;
+  padding-left: 10px;
+}
+
+.option-button {
+  width: 100%;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  color: white;
+}
+
+.customer-button {
+  background: linear-gradient(90deg, #4CAF50, #45a049);
+}
+
+.customer-button:hover {
+  background: linear-gradient(90deg, #45a049, #4CAF50);
+  transform: scale(1.05);
+}
+
+.admin-button {
+  background: linear-gradient(90deg, #2196F3, #1976D2);
+}
+
+.admin-button:hover {
+  background: linear-gradient(90deg, #1976D2, #2196F3);
+  transform: scale(1.05);
+}
+
+.landing-footer {
+  text-align: center;
+  color: white;
+  margin-top: 40px;
+}
+
+.feature-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.badge:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.landing-info {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .landing-header h1 {
+    font-size: 2rem;
+  }
+
+  .landing-tagline {
+    font-size: 1rem;
+  }
+
+  .landing-options {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .option-card {
+    padding: 30px;
+  }
+
+  .option-icon {
+    font-size: 3rem;
+  }
+
+  .option-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .feature-badges {
+    gap: 10px;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-container {
+    padding: 10px;
+  }
+
+  .landing-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .option-card {
+    padding: 20px;
+  }
+}
