@@ -1,0 +1,80 @@
+# Docker Compose file using images from Docker Hub
+# Use this for production deployments
+# Run with: docker-compose -f docker-compose.hub.yml up -d
+
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: service_request_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: service_requests_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - service_request_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: mohamedmuhni/service-request-backend:latest
+    container_name: service_request_backend
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: service_requests_db
+      JWT_SECRET: your_super_secret_jwt_key_change_in_production
+      JWT_EXPIRES_IN: 24h
+    ports:
+      - "5000:5000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - service_request_network
+    command: sh -c "npm run migrate && npm run seed && npm start"
+
+  frontend:
+    image: mohamedmuhni/service-request-frontend:latest
+    container_name: service_request_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - service_request_network
+    environment:
+      REACT_APP_API_URL: http://localhost:5000/api
+
+  nginx:
+    image: nginx:alpine
+    container_name: service_request_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - service_request_network
+
+volumes:
+  mysql_data:
+
+networks:
+  service_request_network:
+    driver: bridge
