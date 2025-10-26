@@ -1,63 +1,229 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 function LandingPage() {
   const navigate = useNavigate();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <div className="landing-container">
-      <div className="landing-content">
-        <div className="landing-header">
-          <h1>🚗 Service Request Management System</h1>
-          <p className="landing-tagline">Professional Service Request & Fleet Management Solution</p>
-        </div>
-
-        <div className="landing-options">
-          <div className="option-card customer-card" onClick={() => navigate('/customer')}>
-            <div className="option-icon">👤</div>
-            <h2>Customer Portal</h2>
-            <p>Submit a new service request</p>
-            <ul className="option-features">
-              <li>✓ Quick request submission</li>
-              <li>✓ Multiple service types</li>
-              <li>✓ Schedule preferred dates</li>
-              <li>✓ Track your requests</li>
-            </ul>
-            <button className="option-button customer-button">
-              Get Started →
-            </button>
+    <div className="landing-page">
+      {/* Navigation Header */}
+      <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="nav-container">
+          <div className="logo">
+            <span className="logo-icon">🚚</span>
+            <span className="logo-text">ServicePro</span>
           </div>
-
-          <div className="option-card admin-card" onClick={() => navigate('/admin/login')}>
-            <div className="option-icon">🔐</div>
-            <h2>Admin Dashboard</h2>
-            <p>Manage requests and operations</p>
-            <ul className="option-features">
-              <li>✓ View all requests</li>
-              <li>✓ Assign drivers & vehicles</li>
-              <li>✓ Track analytics</li>
-              <li>✓ Monitor operations</li>
-            </ul>
-            <button className="option-button admin-button">
-              Admin Login →
+          <div className="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <button className="nav-button" onClick={() => navigate('/admin/login')}>
+              Admin Login
             </button>
           </div>
         </div>
+      </nav>
 
-        <div className="landing-footer">
-          <div className="feature-badges">
-            <span className="badge">📊 Real-time Analytics</span>
-            <span className="badge">🚗 Fleet Management</span>
-            <span className="badge">⏰ Smart Scheduling</span>
-            <span className="badge">📱 Mobile Friendly</span>
-          </div>
-          
-          <p className="landing-info">
-            <strong>Need Help?</strong> Contact our support team 24/7
+      {/* Hero Section */}
+      <section className="hero-section" id="home">
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Professional Service
+            <span className="highlight"> Request Management</span>
+          </h1>
+          <p className="hero-subtitle">
+            Seamless logistics, reliable service, and real-time tracking at your fingertips
           </p>
+          <div className="hero-buttons">
+            <button className="btn btn-primary" onClick={() => navigate('/customer')}>
+              Request Service
+              <span className="btn-icon">→</span>
+            </button>
+            <button className="btn btn-secondary" onClick={() => navigate('/admin/login')}>
+              Admin Portal
+            </button>
+          </div>
+          <div className="hero-stats">
+            <div className="stat-item">
+              <h3>500+</h3>
+              <p>Services Delivered</p>
+            </div>
+            <div className="stat-item">
+              <h3>50+</h3>
+              <p>Professional Drivers</p>
+            </div>
+            <div className="stat-item">
+              <h3>24/7</h3>
+              <p>Support Available</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="services-section" id="services">
+        <div className="container">
+          <div className="section-header">
+            <h2>Our Services</h2>
+            <p>Complete logistics solutions for every need</p>
+          </div>
+          <div className="services-grid">
+            <div className="service-card">
+              <div className="service-icon">📦</div>
+              <h3>Package Delivery</h3>
+              <p>Fast and secure package delivery services with real-time tracking</p>
+              <button className="learn-more" onClick={() => navigate('/customer')}>
+                Book Now →
+              </button>
+            </div>
+            <div className="service-card">
+              <div className="service-icon">🏠</div>
+              <h3>Furniture Moving</h3>
+              <p>Professional furniture relocation with care and precision</p>
+              <button className="learn-more" onClick={() => navigate('/customer')}>
+                Book Now →
+              </button>
+            </div>
+            <div className="service-card">
+              <div className="service-icon">📄</div>
+              <h3>Document Courier</h3>
+              <p>Urgent document delivery with guaranteed on-time arrival</p>
+              <button className="learn-more" onClick={() => navigate('/customer')}>
+                Book Now →
+              </button>
+            </div>
+            <div className="service-card">
+              <div className="service-icon">�</div>
+              <h3>Grocery Delivery</h3>
+              <p>Fresh groceries delivered to your doorstep quickly</p>
+              <button className="learn-more" onClick={() => navigate('/customer')}>
+                Book Now →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="features-section">
+        <div className="container">
+          <div className="features-content">
+            <div className="features-text">
+              <h2>Why Choose ServicePro?</h2>
+              <p className="features-intro">
+                We combine cutting-edge technology with exceptional service to deliver 
+                an unmatched customer experience.
+              </p>
+              <div className="features-list">
+                <div className="feature-item">
+                  <div className="feature-icon">✓</div>
+                  <div>
+                    <h4>Real-Time Tracking</h4>
+                    <p>Monitor your service request status in real-time</p>
+                  </div>
+                </div>
+                <div className="feature-item">
+                  <div className="feature-icon">✓</div>
+                  <div>
+                    <h4>Professional Team</h4>
+                    <p>Experienced and verified drivers and staff</p>
+                  </div>
+                </div>
+                <div className="feature-item">
+                  <div className="feature-icon">✓</div>
+                  <div>
+                    <h4>24/7 Support</h4>
+                    <p>Round-the-clock customer support team</p>
+                  </div>
+                </div>
+                <div className="feature-item">
+                  <div className="feature-icon">✓</div>
+                  <div>
+                    <h4>Flexible Scheduling</h4>
+                    <p>Choose your preferred date and time</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="features-image">
+              <div className="image-placeholder">
+                <span className="placeholder-icon">�</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="cta-section">
+        <div className="container">
+          <div className="cta-content">
+            <h2>Ready to Get Started?</h2>
+            <p>Submit your service request now and experience the difference</p>
+            <button className="btn btn-large" onClick={() => navigate('/customer')}>
+              Request Service Now
+              <span className="btn-icon">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-content">
+            <div className="footer-col">
+              <h4>
+                <span className="logo-icon">🚚</span>
+                ServicePro
+              </h4>
+              <p>Professional service request and fleet management solution for modern businesses.</p>
+            </div>
+            <div className="footer-col">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Services</h4>
+              <ul>
+                <li><a href="#services">Package Delivery</a></li>
+                <li><a href="#services">Furniture Moving</a></li>
+                <li><a href="#services">Document Courier</a></li>
+                <li><a href="#services">Grocery Delivery</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Contact Info</h4>
+              <ul>
+                <li>📧 info@servicepro.com</li>
+                <li>📞 +1 (555) 123-4567</li>
+                <li>📍 123 Business Street</li>
+                <li>🕐 24/7 Available</li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>&copy; 2025 ServicePro. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
