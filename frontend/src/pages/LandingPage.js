@@ -247,7 +247,7 @@ function LandingPage() {
             </div>
             <div className="team-card">
               <img 
-                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop" 
+                src="/member2.png" 
                 alt="Team Member" 
                 className="team-image"
               />
