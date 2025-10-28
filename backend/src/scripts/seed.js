@@ -122,8 +122,8 @@ async function seed() {
     );
 
     // Update driver and vehicle status
-    await db.query('UPDATE drivers SET status = "assigned" WHERE id = 1');
-    await db.query('UPDATE vehicles SET status = "in_use" WHERE id = 1');
+    await db.query("UPDATE drivers SET status = 'assigned' WHERE id = 1");
+    await db.query("UPDATE vehicles SET status = 'in_use' WHERE id = 1");
 
     console.log('✅ Sample assignment created');
 
