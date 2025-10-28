@@ -115,10 +115,6 @@ function AdminLoginPage() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-
-        <p style={{ marginTop: '1rem', textAlign: 'center', color: '#7f8c8d', fontSize: '0.875rem' }}>
-          Default credentials: admin / admin123
-        </p>
       </div>
     </div>
   );
