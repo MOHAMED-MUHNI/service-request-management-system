@@ -216,7 +216,7 @@ exports.updateStatus = async (req, res) => {
     if (status === 'completed' || status === 'cancelled') {
       // Find the assignment for this request
       const [assignments] = await db.query(
-        'SELECT * FROM assignments WHERE request_id = ? AND status != "completed" AND status != "cancelled"',
+        "SELECT * FROM assignments WHERE request_id = ? AND status != 'completed' AND status != 'cancelled'",
         [id]
       );
 
@@ -230,8 +230,8 @@ exports.updateStatus = async (req, res) => {
         );
 
         // Free up the driver and vehicle
-        await db.query('UPDATE drivers SET status = "available" WHERE id = ?', [assignment.driver_id]);
-        await db.query('UPDATE vehicles SET status = "available" WHERE id = ?', [assignment.vehicle_id]);
+        await db.query("UPDATE drivers SET status = 'available' WHERE id = ?", [assignment.driver_id]);
+        await db.query("UPDATE vehicles SET status = 'available' WHERE id = ?", [assignment.vehicle_id]);
       }
     }
 

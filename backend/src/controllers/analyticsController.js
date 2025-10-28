@@ -7,27 +7,27 @@ exports.getDashboardStats = async (req, res) => {
 
     // Pending requests
     const [pendingRequests] = await db.query(
-      'SELECT COUNT(*) as total FROM service_requests WHERE status = "pending"'
+      "SELECT COUNT(*) as total FROM service_requests WHERE status = 'pending'"
     );
 
     // Completed requests
     const [completedRequests] = await db.query(
-      'SELECT COUNT(*) as total FROM service_requests WHERE status = "completed"'
+      "SELECT COUNT(*) as total FROM service_requests WHERE status = 'completed'"
     );
 
     // Active assignments
     const [activeAssignments] = await db.query(
-      'SELECT COUNT(*) as total FROM assignments WHERE status IN ("scheduled", "in_progress")'
+      "SELECT COUNT(*) as total FROM assignments WHERE status IN ('scheduled', 'in_progress')"
     );
 
     // Available drivers
     const [availableDrivers] = await db.query(
-      'SELECT COUNT(*) as total FROM drivers WHERE status = "available"'
+      "SELECT COUNT(*) as total FROM drivers WHERE status = 'available'"
     );
 
     // Available vehicles
     const [availableVehicles] = await db.query(
-      'SELECT COUNT(*) as total FROM vehicles WHERE status = "available"'
+      "SELECT COUNT(*) as total FROM vehicles WHERE status = 'available'"
     );
 
     res.json({
