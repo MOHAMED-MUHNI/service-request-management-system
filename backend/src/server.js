@@ -23,9 +23,18 @@ app.use(express.urlencoded({ extended: true }));
 // Logging middleware
 app.use(logger);
 
-// Health check
+// Health check endpoints
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    service: 'Service Request Management API',
+    version: '1.0.0',
+    timestamp: new Date().toISOString() 
+  });
 });
 
 // Routes

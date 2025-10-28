@@ -10,6 +10,7 @@ A complete, production-ready full-stack application for managing service request
 ## 📋 Table of Contents
 
 - [Features](#features)
+- [Live Demo](#live-demo)
 - [Tech Stack](#tech-stack)
 - [Architecture](#architecture)
 - [Prerequisites](#prerequisites)
@@ -20,6 +21,26 @@ A complete, production-ready full-stack application for managing service request
 - [API Documentation](#api-documentation)
 - [Deployment](#deployment)
 - [Troubleshooting](#troubleshooting)
+
+## 🌐 Live Demo
+
+> 🚀 **Coming Soon!** This application will be deployed to Render.com
+
+**Once deployed, the demo will be available at:**
+- 🌍 **Frontend**: `https://service-request-frontend.onrender.com` (Update after deployment)
+- 🔌 **Backend API**: `https://service-request-backend.onrender.com/api` (Update after deployment)
+
+**Demo Credentials:**
+```
+Username: admin
+Password: admin123
+```
+
+> ⚠️ **Note**: Free tier services may take 30-60 seconds to wake up after inactivity.
+
+📖 **Deployment Guide**: See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for step-by-step instructions.
+
+---
 
 ## ✨ Features
 
@@ -492,6 +513,21 @@ Response:
 - `500` - Internal Server Error
 
 ## 🚢 Deployment
+
+### Render.com Deployment (Recommended)
+
+**✨ Complete deployment guide available in [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)**
+
+Quick overview:
+1. Set up free MySQL database (Aiven)
+2. Deploy backend to Render
+3. Deploy frontend to Render
+4. Update README with live demo links
+
+**Total Cost:** $0/month (Free tier)
+**Deployment Time:** 30-45 minutes
+
+---
 
 ### Docker Deployment
 

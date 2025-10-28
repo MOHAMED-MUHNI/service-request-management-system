@@ -5,6 +5,7 @@ import './LandingPage.css';
 function LandingPage() {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +14,10 @@ function LandingPage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <div className="landing-page">
@@ -23,12 +28,22 @@ function LandingPage() {
             <span className="logo-icon">🚚</span>
             <span className="logo-text">ServicePro</span>
           </div>
-          <div className="nav-links">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <button className="nav-button" onClick={() => navigate('/admin/login')}>
+          
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="mobile-menu-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? '✕' : '☰'}
+          </button>
+
+          <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+            <a href="#home" onClick={closeMobileMenu}>Home</a>
+            <a href="#services" onClick={closeMobileMenu}>Services</a>
+            <a href="#about" onClick={closeMobileMenu}>About</a>
+            <a href="#contact" onClick={closeMobileMenu}>Contact</a>
+            <button className="nav-button" onClick={() => { navigate('/admin/login'); closeMobileMenu(); }}>
               Admin Login
             </button>
           </div>
@@ -81,36 +96,60 @@ function LandingPage() {
           </div>
           <div className="services-grid">
             <div className="service-card">
-              <div className="service-icon">📦</div>
-              <h3>Package Delivery</h3>
-              <p>Fast and secure package delivery services with real-time tracking</p>
-              <button className="learn-more" onClick={() => navigate('/customer')}>
-                Book Now →
-              </button>
+              <img 
+                src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=400&fit=crop" 
+                alt="Package Delivery" 
+                className="service-image"
+              />
+              <div className="service-content">
+                <h3>Package Delivery</h3>
+                <p>Fast and secure package delivery services with real-time tracking</p>
+                <button className="learn-more" onClick={() => navigate('/customer')}>
+                  Book Now →
+                </button>
+              </div>
             </div>
             <div className="service-card">
-              <div className="service-icon">🏠</div>
-              <h3>Furniture Moving</h3>
-              <p>Professional furniture relocation with care and precision</p>
-              <button className="learn-more" onClick={() => navigate('/customer')}>
-                Book Now →
-              </button>
+              <img 
+                src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&h=400&fit=crop" 
+                alt="Furniture Moving" 
+                className="service-image"
+              />
+              <div className="service-content">
+                <h3>Furniture Moving</h3>
+                <p>Professional furniture relocation with care and precision</p>
+                <button className="learn-more" onClick={() => navigate('/customer')}>
+                  Book Now →
+                </button>
+              </div>
             </div>
             <div className="service-card">
-              <div className="service-icon">📄</div>
-              <h3>Document Courier</h3>
-              <p>Urgent document delivery with guaranteed on-time arrival</p>
-              <button className="learn-more" onClick={() => navigate('/customer')}>
-                Book Now →
-              </button>
+              <img 
+                src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&h=400&fit=crop" 
+                alt="Document Courier" 
+                className="service-image"
+              />
+              <div className="service-content">
+                <h3>Document Courier</h3>
+                <p>Urgent document delivery with guaranteed on-time arrival</p>
+                <button className="learn-more" onClick={() => navigate('/customer')}>
+                  Book Now →
+                </button>
+              </div>
             </div>
             <div className="service-card">
-              <div className="service-icon">�</div>
-              <h3>Grocery Delivery</h3>
-              <p>Fresh groceries delivered to your doorstep quickly</p>
-              <button className="learn-more" onClick={() => navigate('/customer')}>
-                Book Now →
-              </button>
+              <img 
+                src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?w=600&h=400&fit=crop" 
+                alt="Grocery Delivery" 
+                className="service-image"
+              />
+              <div className="service-content">
+                <h3>Grocery Delivery</h3>
+                <p>Fresh groceries delivered to your doorstep quickly</p>
+                <button className="learn-more" onClick={() => navigate('/customer')}>
+                  Book Now →
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -158,8 +197,62 @@ function LandingPage() {
               </div>
             </div>
             <div className="features-image">
-              <div className="image-placeholder">
-                <span className="placeholder-icon">�</span>
+              <div className="image-placeholder"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="team-section" id="about">
+        <div className="container">
+          <div className="section-header">
+            <h2>Our Professional Team</h2>
+            <p>Meet the experts behind our success</p>
+          </div>
+          <div className="team-grid">
+            <div className="team-card">
+              <img 
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop" 
+                alt="Team Member" 
+                className="team-image"
+              />
+              <div className="team-info">
+                <h4>John Anderson</h4>
+                <p>Fleet Manager</p>
+              </div>
+            </div>
+            <div className="team-card">
+              <img 
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop" 
+                alt="Team Member" 
+                className="team-image"
+              />
+              <div className="team-info">
+                <h4>Sarah Williams</h4>
+                <p>Operations Director</p>
+              </div>
+            </div>
+            <div className="team-card">
+              <img 
+                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=500&fit=crop" 
+                alt="Team Member" 
+                className="team-image"
+              />
+              <div className="team-info">
+                <h4>Michael Chen</h4>
+                <p>Logistics Coordinator</p>
+              </div>
+            </div>
+            <div className="team-card">
+              <img 
+                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop" 
+                alt="Team Member" 
+                className="team-image"
+              />
+              <div className="team-info">
+                <h4>Emily Rodriguez</h4>
+                <p>Customer Success Lead</p>
               </div>
             </div>
           </div>
@@ -167,12 +260,12 @@ function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section">
+      <section className="cta-section" id="contact">
         <div className="container">
           <div className="cta-content">
             <h2>Ready to Get Started?</h2>
             <p>Submit your service request now and experience the difference</p>
-            <button className="btn btn-large" onClick={() => navigate('/customer')}>
+            <button className="btn btn-large btn-primary" onClick={() => navigate('/customer')}>
               Request Service Now
               <span className="btn-icon">→</span>
             </button>
