@@ -13,7 +13,7 @@ exports.getAllVehicles = async (req, res) => {
 exports.getAvailableVehicles = async (req, res) => {
   try {
     const [vehicles] = await db.query(
-      'SELECT * FROM vehicles WHERE status = "available" ORDER BY model'
+      "SELECT * FROM vehicles WHERE status = 'available' ORDER BY model"
     );
     res.json(vehicles);
   } catch (error) {

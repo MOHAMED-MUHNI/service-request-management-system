@@ -13,7 +13,7 @@ exports.getAllDrivers = async (req, res) => {
 exports.getAvailableDrivers = async (req, res) => {
   try {
     const [drivers] = await db.query(
-      'SELECT * FROM drivers WHERE status = "available" ORDER BY name'
+      "SELECT * FROM drivers WHERE status = 'available' ORDER BY name"
     );
     res.json(drivers);
   } catch (error) {
