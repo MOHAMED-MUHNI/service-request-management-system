@@ -252,7 +252,7 @@ function LandingPage() {
                 className="team-image"
               />
               <div className="team-info">
-                <h4>Emily Rodriguez</h4>
+                <h4>Amry Kaan</h4>
                 <p>Customer Success Lead</p>
               </div>
             </div>
