@@ -22,7 +22,7 @@ exports.createAssignment = async (req, res) => {
 
     // Check if driver exists and is available
     const [drivers] = await db.query(
-      'SELECT * FROM drivers WHERE id = ? AND status = "available"',
+      "SELECT * FROM drivers WHERE id = ? AND status = 'available'",
       [driver_id]
     );
 
@@ -32,7 +32,7 @@ exports.createAssignment = async (req, res) => {
 
     // Check if vehicle exists and is available
     const [vehicles] = await db.query(
-      'SELECT * FROM vehicles WHERE id = ? AND status = "available"',
+      "SELECT * FROM vehicles WHERE id = ? AND status = 'available'",
       [vehicle_id]
     );
 
@@ -50,13 +50,13 @@ exports.createAssignment = async (req, res) => {
 
     // Update service request status
     await db.query(
-      'UPDATE service_requests SET status = "assigned" WHERE id = ?',
+      "UPDATE service_requests SET status = 'assigned' WHERE id = ?",
       [request_id]
     );
 
     // Update driver and vehicle status
-    await db.query('UPDATE drivers SET status = "assigned" WHERE id = ?', [driver_id]);
-    await db.query('UPDATE vehicles SET status = "in_use" WHERE id = ?', [vehicle_id]);
+    await db.query("UPDATE drivers SET status = 'assigned' WHERE id = ?", [driver_id]);
+    await db.query("UPDATE vehicles SET status = 'in_use' WHERE id = ?", [vehicle_id]);
 
     res.status(201).json({
       message: 'Assignment created successfully',
@@ -166,8 +166,8 @@ exports.updateAssignment = async (req, res) => {
       if (status === 'completed' || status === 'cancelled') {
         const [assignments] = await db.query('SELECT * FROM assignments WHERE id = ?', [id]);
         if (assignments.length > 0) {
-          await db.query('UPDATE drivers SET status = "available" WHERE id = ?', [assignments[0].driver_id]);
-          await db.query('UPDATE vehicles SET status = "available" WHERE id = ?', [assignments[0].vehicle_id]);
+          await db.query("UPDATE drivers SET status = 'available' WHERE id = ?", [assignments[0].driver_id]);
+          await db.query("UPDATE vehicles SET status = 'available' WHERE id = ?", [assignments[0].vehicle_id]);
         }
       }
     }
@@ -211,11 +211,11 @@ exports.deleteAssignment = async (req, res) => {
     await db.query('DELETE FROM assignments WHERE id = ?', [id]);
 
     // Update driver and vehicle status back to available
-    await db.query('UPDATE drivers SET status = "available" WHERE id = ?', [assignment.driver_id]);
-    await db.query('UPDATE vehicles SET status = "available" WHERE id = ?', [assignment.vehicle_id]);
+    await db.query("UPDATE drivers SET status = 'available' WHERE id = ?", [assignment.driver_id]);
+    await db.query("UPDATE vehicles SET status = 'available' WHERE id = ?", [assignment.vehicle_id]);
 
     // Update service request status back to pending
-    await db.query('UPDATE service_requests SET status = "pending" WHERE id = ?', [assignment.request_id]);
+    await db.query("UPDATE service_requests SET status = 'pending' WHERE id = ?", [assignment.request_id]);
 
     res.json({ message: 'Assignment deleted successfully' });
   } catch (error) {

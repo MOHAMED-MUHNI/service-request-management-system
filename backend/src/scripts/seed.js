@@ -24,7 +24,9 @@ async function seed() {
       { name: 'Sarah Johnson', phone: '555-0102', email: 'sarah@example.com', license_number: 'DL002', status: 'available' },
       { name: 'Mike Wilson', phone: '555-0103', email: 'mike@example.com', license_number: 'DL003', status: 'available' },
       { name: 'Emily Brown', phone: '555-0104', email: 'emily@example.com', license_number: 'DL004', status: 'available' },
-      { name: 'David Lee', phone: '555-0105', email: 'david@example.com', license_number: 'DL005', status: 'off_duty' }
+      { name: 'David Lee', phone: '555-0105', email: 'david@example.com', license_number: 'DL005', status: 'available' },
+      { name: 'Jessica Taylor', phone: '555-0106', email: 'jessica@example.com', license_number: 'DL006', status: 'available' },
+      { name: 'Robert Chen', phone: '555-0107', email: 'robert@example.com', license_number: 'DL007', status: 'available' }
     ];
 
     for (const driver of drivers) {
@@ -43,7 +45,9 @@ async function seed() {
       { model: 'Honda Accord 2023', plate_number: 'DEF-456', year: 2023, capacity: '4 passengers', status: 'available' },
       { model: 'Ford Transit Van 2021', plate_number: 'GHI-789', year: 2021, capacity: '8 passengers', status: 'available' },
       { model: 'Chevrolet Silverado 2022', plate_number: 'JKL-012', year: 2022, capacity: '1000 lbs', status: 'available' },
-      { model: 'Nissan Altima 2023', plate_number: 'MNO-345', year: 2023, capacity: '4 passengers', status: 'maintenance' }
+      { model: 'Nissan Altima 2023', plate_number: 'MNO-345', year: 2023, capacity: '4 passengers', status: 'available' },
+      { model: 'Toyota Highlander 2024', plate_number: 'PQR-678', year: 2024, capacity: '7 passengers', status: 'available' },
+      { model: 'Mercedes Sprinter 2023', plate_number: 'STU-901', year: 2023, capacity: '12 passengers', status: 'available' }
     ];
 
     for (const vehicle of vehicles) {
