@@ -26,11 +26,11 @@ A complete, production-ready full-stack application for managing service request
 
 ## 🌐 Live Demo
 
-> 🚀 **Coming Soon!** This application will be deployed to Render.com
+> 🚀 **Live Application Deployed!**
 
-**Once deployed, the demo will be available at:**
-- 🌍 **Frontend**: `https://service-request-frontend.onrender.com` (Update after deployment)
-- 🔌 **Backend API**: `https://service-request-backend.onrender.com/api` (Update after deployment)
+**Access the demo at:**
+- 🌍 **Frontend**: https://service-request-management-system-frontend.onrender.com
+- 🔌 **Backend API**: https://service-request-management-system.onrender.com/api
 
 **Demo Credentials:**
 ```
