@@ -10,6 +10,8 @@
     "test:watch": "jest --watch",
     "migrate": "node src/scripts/migrate.js",
     "seed": "node src/scripts/seed.js",
+    "init-db": "node src/scripts/init-db.js",
+    "cleanup": "node src/scripts/cleanup.js",
     "lint": "eslint . --ext .js"
   },
   "keywords": ["service-request", "api", "nodejs"],

@@ -17,7 +17,9 @@ function CustomerRequestPage() {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState('success'); // 'success' or 'error'
+  const [requestId, setRequestId] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,11 +81,13 @@ function CustomerRequestPage() {
     }
 
     setLoading(true);
-    setSuccess(false);
 
     try {
-      await serviceRequestAPI.create(formData);
-      setSuccess(true);
+      const response = await serviceRequestAPI.create(formData);
+      setRequestId(response.data.id);
+      setModalType('success');
+      setShowModal(true);
+      
       // Reset form
       setFormData({
         customer_name: '',
@@ -95,10 +99,11 @@ function CustomerRequestPage() {
         preferred_date: '',
         special_instructions: '',
       });
-      setTimeout(() => setSuccess(false), 5000);
+      setErrors({});
     } catch (error) {
       console.error('Error submitting request:', error);
-      setErrors({ submit: 'Failed to submit request. Please try again.' });
+      setModalType('error');
+      setShowModal(true);
     } finally {
       setLoading(false);
     }
@@ -106,28 +111,68 @@ function CustomerRequestPage() {
 
   return (
     <div>
-      <div className="navbar">
-        <button 
-          onClick={() => navigate('/')} 
+      <div className="navbar" style={{ justifyContent: 'center' }}>
+        <button
+          onClick={() => navigate('/')}
           className="back-home-button"
           style={{
             position: 'absolute',
-            left: '20px',
+            left: '2rem',
             background: 'rgba(255, 255, 255, 0.2)',
             border: '1px solid rgba(255, 255, 255, 0.3)',
             color: 'white',
-            padding: '8px 16px',
-            borderRadius: '5px',
+            padding: '10px 20px',
+            borderRadius: '25px',
             cursor: 'pointer',
             fontSize: '14px',
-            transition: 'all 0.3s ease'
+            fontWeight: '600',
+            transition: 'all 0.3s ease',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px'
           }}
-          onMouseOver={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.3)'}
-          onMouseOut={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.2)'}
+          onMouseOver={(e) => {
+            e.target.style.background = 'rgba(255, 255, 255, 0.3)';
+            e.target.style.transform = 'translateY(-2px)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+            e.target.style.transform = 'translateY(0)';
+          }}
         >
           ← Back to Home
         </button>
-        <h1>🚚 Service Request App</h1>
+        <h1 style={{ margin: 0 }}>Service Request App</h1>
+        <button
+          onClick={() => navigate('/track')}
+          className="track-button"
+          style={{
+            position: 'absolute',
+            right: '2rem',
+            background: 'rgba(255, 255, 255, 0.2)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            color: 'white',
+            padding: '10px 20px',
+            borderRadius: '25px',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+            transition: 'all 0.3s ease',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.background = 'rgba(255, 255, 255, 0.3)';
+            e.target.style.transform = 'translateY(-2px)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+            e.target.style.transform = 'translateY(0)';
+          }}
+        >
+          Track Request →
+        </button>
       </div>
 
       <div className="container">
@@ -136,18 +181,6 @@ function CustomerRequestPage() {
           <p style={{ marginBottom: '1.5rem', color: '#7f8c8d' }}>
             Fill out the form below to request our services
           </p>
-
-          {success && (
-            <div className="success-message">
-              ✓ Your service request has been submitted successfully! We'll contact you soon.
-            </div>
-          )}
-
-          {errors.submit && (
-            <div className="error-message" style={{ marginBottom: '1rem' }}>
-              {errors.submit}
-            </div>
-          )}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -280,6 +313,98 @@ function CustomerRequestPage() {
           </form>
         </div>
       </div>
+
+      {/* Success/Error Modal */}
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '500px' }}>
+            <div style={{ textAlign: 'center' }}>
+              {modalType === 'success' ? (
+                <>
+                  <div style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    background: '#d4edda',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 1.5rem',
+                    fontSize: '3rem'
+                  }}>
+                    ✓
+                  </div>
+                  <h2 style={{ color: '#27ae60', marginBottom: '1rem' }}>Request Submitted Successfully!</h2>
+                  <p style={{ color: '#555', marginBottom: '1rem', fontSize: '1rem' }}>
+                    Your service request has been received and is now pending review.
+                  </p>
+                  {requestId && (
+                    <p style={{ 
+                      background: '#f8f9fa', 
+                      padding: '1rem', 
+                      borderRadius: '8px',
+                      marginBottom: '1rem',
+                      fontSize: '0.95rem'
+                    }}>
+                      <strong>Request ID:</strong> #{requestId}<br/>
+                      <span style={{ fontSize: '0.875rem', color: '#7f8c8d' }}>
+                        Save this ID to track your request
+                      </span>
+                    </p>
+                  )}
+                  <p style={{ color: '#7f8c8d', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+                    📧 We'll contact you at <strong>{formData.customer_email}</strong><br/>
+                    📱 or call you at <strong>{formData.customer_phone}</strong>
+                  </p>
+                  <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => navigate('/track')}
+                      style={{ flex: 1 }}
+                    >
+                      Track Request
+                    </button>
+                    <button
+                      className="btn"
+                      onClick={() => setShowModal(false)}
+                      style={{ flex: 1 }}
+                    >
+                      Submit Another
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    background: '#f8d7da',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 1.5rem',
+                    fontSize: '3rem'
+                  }}>
+                    ✕
+                  </div>
+                  <h2 style={{ color: '#e74c3c', marginBottom: '1rem' }}>Submission Failed</h2>
+                  <p style={{ color: '#555', marginBottom: '1.5rem' }}>
+                    We couldn't submit your request. Please check your internet connection and try again.
+                  </p>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => setShowModal(false)}
+                    style={{ width: '100%' }}
+                  >
+                    Try Again
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

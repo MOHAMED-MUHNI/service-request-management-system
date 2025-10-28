@@ -212,9 +212,85 @@ exports.updateStatus = async (req, res) => {
       return res.status(404).json({ message: 'Service request not found' });
     }
 
+    // If status is completed or cancelled, also update the assignment and free resources
+    if (status === 'completed' || status === 'cancelled') {
+      // Find the assignment for this request
+      const [assignments] = await db.query(
+        'SELECT * FROM assignments WHERE request_id = ? AND status != "completed" AND status != "cancelled"',
+        [id]
+      );
+
+      if (assignments.length > 0) {
+        const assignment = assignments[0];
+        
+        // Update assignment status to match
+        await db.query(
+          'UPDATE assignments SET status = ?, updated_at = NOW() WHERE id = ?',
+          [status, assignment.id]
+        );
+
+        // Free up the driver and vehicle
+        await db.query('UPDATE drivers SET status = "available" WHERE id = ?', [assignment.driver_id]);
+        await db.query('UPDATE vehicles SET status = "available" WHERE id = ?', [assignment.vehicle_id]);
+      }
+    }
+
     res.json({ message: 'Status updated successfully' });
   } catch (error) {
     console.error('Update status error:', error);
     res.status(500).json({ message: 'Error updating status' });
+  }
+};
+
+// Public endpoint - Track request by email and phone
+exports.trackRequest = async (req, res) => {
+  try {
+    const { email, phone } = req.query;
+
+    if (!email || !phone) {
+      return res.status(400).json({ 
+        message: 'Email and phone number are required' 
+      });
+    }
+
+    const [requests] = await db.query(
+      `SELECT 
+        sr.id,
+        sr.customer_name,
+        sr.customer_email,
+        sr.customer_phone,
+        sr.service_type,
+        sr.pickup_address,
+        sr.delivery_address,
+        sr.preferred_date,
+        sr.status,
+        sr.created_at,
+        a.scheduled_date,
+        d.name as driver_name,
+        d.phone as driver_phone,
+        v.model as vehicle_model,
+        v.plate_number as vehicle_plate
+      FROM service_requests sr
+      LEFT JOIN assignments a ON sr.id = a.request_id
+      LEFT JOIN drivers d ON a.driver_id = d.id
+      LEFT JOIN vehicles v ON a.vehicle_id = v.id
+      WHERE sr.customer_email = ? AND sr.customer_phone = ?
+      ORDER BY sr.created_at DESC`,
+      [email, phone]
+    );
+
+    if (requests.length === 0) {
+      return res.status(404).json({ 
+        message: 'No requests found with the provided email and phone number' 
+      });
+    }
+
+    res.json({
+      message: 'Requests found',
+      data: requests
+    });
+  } catch (error) {
+    console.error('Track request error:', error);
+    res.status(500).json({ message: 'Error tracking request' });
   }
 };

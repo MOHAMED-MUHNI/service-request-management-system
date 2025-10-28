@@ -6,6 +6,8 @@ A complete, production-ready full-stack application for managing service request
 [![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-orange.svg)](https://www.mysql.com/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
+[![Deploy](https://img.shields.io/badge/Deploy-Render-46E3B7.svg)](https://render.com)
+[![License](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
 
 ## 📋 Table of Contents
 

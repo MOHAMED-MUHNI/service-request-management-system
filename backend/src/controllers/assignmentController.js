@@ -161,6 +161,15 @@ exports.updateAssignment = async (req, res) => {
       }
       updateFields.push('status = ?');
       params.push(status);
+      
+      // If assignment is completed or cancelled, free up driver and vehicle
+      if (status === 'completed' || status === 'cancelled') {
+        const [assignments] = await db.query('SELECT * FROM assignments WHERE id = ?', [id]);
+        if (assignments.length > 0) {
+          await db.query('UPDATE drivers SET status = "available" WHERE id = ?', [assignments[0].driver_id]);
+          await db.query('UPDATE vehicles SET status = "available" WHERE id = ?', [assignments[0].vehicle_id]);
+        }
+      }
     }
 
     if (updateFields.length === 0) {

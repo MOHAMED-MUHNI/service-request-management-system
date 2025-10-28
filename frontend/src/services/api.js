@@ -49,6 +49,7 @@ export const serviceRequestAPI = {
   update: (id, data) => api.put(`/service-requests/${id}`, data),
   delete: (id) => api.delete(`/service-requests/${id}`),
   updateStatus: (id, status) => api.patch(`/service-requests/${id}/status`, { status }),
+  track: (email, phone) => api.get('/service-requests/track', { params: { email, phone } }),
 };
 
 // Assignments API

@@ -130,11 +130,11 @@ function DashboardPage() {
   return (
     <div>
       <div className="navbar">
-        <h1>📊 Admin Dashboard</h1>
+        <h1>Admin Dashboard</h1>
         <button onClick={handleLogout}>Logout</button>
       </div>
 
-      <div className="container">
+      <div className="dashboard-container">
         {stats && <DashboardStats stats={stats} />}
 
         {chartData.length > 0 && <RequestsChart data={chartData} />}

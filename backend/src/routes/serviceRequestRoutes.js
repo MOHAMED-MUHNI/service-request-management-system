@@ -5,7 +5,7 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// Public route - create service request
+// Public routes
 router.post(
   '/',
   [
@@ -19,6 +19,9 @@ router.post(
   ],
   serviceRequestController.createRequest
 );
+
+// Public route - Track request by email and phone
+router.get('/track', serviceRequestController.trackRequest);
 
 // Protected routes - require authentication
 router.get('/', auth, serviceRequestController.getAllRequests);

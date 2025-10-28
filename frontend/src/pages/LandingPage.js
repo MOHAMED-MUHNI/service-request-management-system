@@ -25,7 +25,7 @@ function LandingPage() {
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="nav-container">
           <div className="logo">
-            <span className="logo-icon">🚚</span>
+            <img src="/logoMain.png" alt="ServicePro Logo" className="logo-icon" />
             <span className="logo-text">ServicePro</span>
           </div>
           
@@ -43,6 +43,7 @@ function LandingPage() {
             <a href="#services" onClick={closeMobileMenu}>Services</a>
             <a href="#about" onClick={closeMobileMenu}>About</a>
             <a href="#contact" onClick={closeMobileMenu}>Contact</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/track'); closeMobileMenu(); }}>Track Request</a>
             <button className="nav-button" onClick={() => { navigate('/admin/login'); closeMobileMenu(); }}>
               Admin Login
             </button>
@@ -213,12 +214,12 @@ function LandingPage() {
           <div className="team-grid">
             <div className="team-card">
               <img 
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop" 
-                alt="Team Member" 
+                src="/member1.png" 
+                alt="Muhni - Fleet Manager" 
                 className="team-image"
               />
               <div className="team-info">
-                <h4>John Anderson</h4>
+                <h4>Muhni</h4>
                 <p>Fleet Manager</p>
               </div>
             </div>
@@ -279,7 +280,7 @@ function LandingPage() {
           <div className="footer-content">
             <div className="footer-col">
               <h4>
-                <span className="logo-icon">🚚</span>
+                <img src="/logoMain.png" alt="ServicePro" style={{width: '50px', height: '50px', objectFit: 'contain', marginRight: '10px', verticalAlign: 'middle'}} />
                 ServicePro
               </h4>
               <p>Professional service request and fleet management solution for modern businesses.</p>

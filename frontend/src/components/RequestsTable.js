@@ -90,13 +90,26 @@ function RequestsTable({
                   </td>
                   <td>
                     {request.status === 'pending' && (
-                      <button
-                        className="btn btn-success"
-                        style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
-                        onClick={() => onSchedule(request)}
-                      >
-                        Schedule
-                      </button>
+                      <>
+                        <button
+                          className="btn btn-success"
+                          style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', marginRight: '0.5rem' }}
+                          onClick={() => onSchedule(request)}
+                        >
+                          Schedule
+                        </button>
+                        <button
+                          className="btn btn-danger"
+                          style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
+                          onClick={() => {
+                            if (window.confirm('Are you sure you want to reject this request?')) {
+                              onStatusChange(request.id, 'cancelled');
+                            }
+                          }}
+                        >
+                          Reject
+                        </button>
+                      </>
                     )}
                     {request.status === 'assigned' && (
                       <button
