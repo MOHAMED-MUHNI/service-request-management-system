@@ -98,7 +98,7 @@ This project was built as an internship technical assessment. **All requirements
 > 🚀 **Live Application Deployed!**
 
 **Access the demo at:**
-- 🌍 **Frontend**: https://service-request-management-system-frontend.onrender.com
+- 🌍 **Frontend**: https://service-request-management-system-zaf2.onrender.com/
 - 🔌 **Backend API**: https://service-request-management-system.onrender.com/api
 
 **Demo Credentials:**
