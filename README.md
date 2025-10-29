@@ -14,15 +14,27 @@ A complete, production-ready full-stack application for managing service request
 - [Features](#features)
 - [Live Demo](#live-demo)
 - [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
-- [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
+- [📚 Documentation](#documentation)
 - [Installation](#installation)
-- [Running the Application](#running-the-application)
-- [Testing](#testing)
 - [API Documentation](#api-documentation)
 - [Deployment](#deployment)
-- [Troubleshooting](#troubleshooting)
+
+## 📚 Documentation
+
+**🎯 Lost in too many docs?**  
+👉 **Start here:** [`docs/WHICH_FILE_TO_READ.md`](docs/WHICH_FILE_TO_READ.md) - Quick guide to find what you need!
+
+**Essential Docs:**
+- 🚀 [**QUICKSTART.md**](docs/QUICKSTART.md) - Set up locally in 5 minutes
+- 🌐 [**RENDER_DEPLOYMENT.md**](docs/RENDER_DEPLOYMENT.md) - Deploy to production
+- 📖 [**PROJECT_SUMMARY.md**](docs/PROJECT_SUMMARY.md) - System overview
+- 🏗️ [**ARCHITECTURE.md**](docs/ARCHITECTURE.md) - Code structure
+- 🗄️ [**DATABASE_INFO.md**](docs/DATABASE_INFO.md) - Database schema
+
+[📁 View all documentation →](docs/)
+
+---
 
 ## 🌐 Live Demo
 
@@ -40,7 +52,7 @@ Password: admin123
 
 > ⚠️ **Note**: Free tier services may take 30-60 seconds to wake up after inactivity.
 
-📖 **Deployment Guide**: See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for step-by-step instructions.
+📖 **Full Documentation**: See [docs/](./docs/) folder for detailed guides.
 
 ---
 
