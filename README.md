@@ -60,7 +60,7 @@ This project was built as an internship technical assessment. **All requirements
 - ❌ Live updates via WebSockets/SSE
 
 ### ⏱️ Development Timeline
-- **Time Spent**: ~12 hours over 3 days
+- **Time Spent**: ~12 hours over 5 days
 - **Commit Count**: 50+ commits
 - **Lines of Code**: Backend (~2,500), Frontend (~1,800)
 
